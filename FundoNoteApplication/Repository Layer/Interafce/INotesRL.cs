@@ -1,4 +1,5 @@
 ﻿using Common_Layer.Model;
+using Microsoft.AspNetCore.Http;
 using Repository_Layer.Entity;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,6 @@ namespace Repository_Layer.Interafce
         public NotesEntity NoteArchive(long UserId, long NoteId);
         public bool NoteTrash(long UserId, long NoteId);
         public NotesEntity NoteColourChange(long notesId, string Colour);
+        public string Image(long userId, long notesId, IFormFile file);
     }
 }

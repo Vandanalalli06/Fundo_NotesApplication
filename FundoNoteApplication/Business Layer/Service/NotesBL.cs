@@ -1,7 +1,9 @@
 ﻿using Business_Layer.Interface;
 using Common_Layer.Model;
+using Microsoft.AspNetCore.Http;
 using Repository_Layer.Entity;
 using Repository_Layer.Interafce;
+using Repository_Layer.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -40,7 +42,7 @@ namespace Business_Layer.Service
                 throw;
             }
         }
-        public IEnumerable<NotesEntity> NotesRetrieve(long UserId)
+        public List<NotesEntity> NotesRetrieve(long UserId)
         {
             try
             {
@@ -111,6 +113,18 @@ namespace Business_Layer.Service
 
                 throw new Exception(ex.Message);
             }
+        }
+        public string Image(long userId, long notesId, IFormFile file)
+        {
+            try
+            {
+                return notesRL.Image(userId, notesId, file);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
     }
 }

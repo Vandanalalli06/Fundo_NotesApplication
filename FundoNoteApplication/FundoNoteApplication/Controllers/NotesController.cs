@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repository_Layer.Context;
+using Repository_Layer.Service;
 using System;
 using System.Linq;
 
@@ -205,8 +206,8 @@ namespace FundoNoteApplication.Controllers
             try
             {
                 long UserID = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserID").Value);
-                var resdata = notesBL.NoteColourChange(notesId,Colour);
-                if (resdata!=null)
+                var resdata = notesBL.NoteColourChange(notesId, Colour);
+                if (resdata != null)
                 {
                     return this.Ok(new { success = true, message = "Colour changed Successfully", data = resdata });
                 }
@@ -219,6 +220,30 @@ namespace FundoNoteApplication.Controllers
             {
 
                 throw new Exception(ex.Message);
+            }
+        }
+        [Authorize]
+        [HttpPut]
+        [Route("Image")]
+        public IActionResult Image(IFormFile image, long notesId)
+        {
+            try
+            {
+                long UserID = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserID").Value);
+                var result = notesBL.Image(UserID,notesId ,image);
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "Image Uploaded SUccesfully", data = result });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "Image Upload Unsuccessfull" });
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
     }
