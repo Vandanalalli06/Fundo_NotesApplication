@@ -83,8 +83,31 @@ namespace Repository_Layer.Service
                 throw;
             }
         }
+        public string LabelDelete(long labelId, long noteId)
+        {
+            try
+            {
+                var labelTable = fundoContext.LabelTable.Where(x => x.LabelID == labelId && x.NotesId == noteId).FirstOrDefault();
+                if (labelTable != null)
+                {
+                    fundoContext.LabelTable.Remove(labelTable);
+                    fundoContext.SaveChanges();
+                    return "Successfully Deleted The Label";
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
+
         
     
     
