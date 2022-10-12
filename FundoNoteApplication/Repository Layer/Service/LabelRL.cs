@@ -43,6 +43,24 @@ namespace Repository_Layer.Service
                 throw;
             }
         }
+        public List<LabelEntity> GetLabel(long UserId)
+        {
+            try
+            {
+                var result = fundoContext.LabelTable.Where(u => u.UserId == UserId).ToList();
+                if (result != null)
+                {
+                    return result;
+                }
+                else
+                    return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
+    
             

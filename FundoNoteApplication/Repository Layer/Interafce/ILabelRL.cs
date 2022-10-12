@@ -7,5 +7,6 @@ namespace RepositoryLayer.Interface
     public interface ILabelRL
     {
         public LabelEntity CreateLabel(long UserId, long NoteId, string LabelName);
+        public List<LabelEntity> GetLabel(long UserId);
     }
 }

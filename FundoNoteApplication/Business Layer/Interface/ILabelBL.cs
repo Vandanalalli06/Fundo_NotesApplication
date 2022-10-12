@@ -7,5 +7,6 @@ namespace BusinessLayer.Interface
     public interface ILabelBL
     {
         public LabelEntity CreateLabel(long UserId, long NoteId, string labelName);
+        public List<LabelEntity> GetLabel(long userId);
     }
 }

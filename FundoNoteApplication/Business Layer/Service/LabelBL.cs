@@ -27,5 +27,16 @@ namespace Business_Layer.Service
                 throw ;
             }
         }
+        public List<LabelEntity> GetLabel(long userId)
+        {
+            try
+            {
+                return labelRL.GetLabel(userId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
