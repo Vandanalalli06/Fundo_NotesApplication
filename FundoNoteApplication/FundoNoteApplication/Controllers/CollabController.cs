@@ -67,5 +67,17 @@ namespace FundoNoteApplication.Controllers
                 throw;
             }
         }
+        [Authorize]
+        [HttpGet("GetCollab")]
+        public IActionResult GetCollab()
+        {
+            long UserId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserID").Value);
+            var result = collabBL.GetCollab(UserId);
+            if (result != null)
+                return this.Ok(new { success = true, message = "Collabarator Retreived Successfully", data = result});
+            else
+                return this.BadRequest(new { success = false, message = "Collabarator couldnot be retrieved" });
+
+        }
     }
 }
