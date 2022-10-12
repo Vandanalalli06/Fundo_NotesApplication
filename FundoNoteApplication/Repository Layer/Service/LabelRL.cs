@@ -1,8 +1,9 @@
 ﻿using Repository_Layer.Context;
 using Repository_Layer.Entity;
-using Repository_Layer.Interafce;
+using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Repository_Layer.Service
@@ -10,18 +11,20 @@ namespace Repository_Layer.Service
     public class LabelRL : ILabelRL
     {
         private readonly FundoContext fundoContext;
+
         public LabelRL(FundoContext fundoContext)
         {
             this.fundoContext = fundoContext;
         }
-        public LabelEntity Create(long userId, long noteId, string labelName)
+
+        public LabelEntity CreateLabel(long UserId, long NoteId, string LabelName)
         {
             try
             {
                 LabelEntity label = new LabelEntity();
-                label.UserId = userId;
-                label.NotesId = noteId;
-                label.LabelName = labelName;
+                label.UserId = UserId;
+                label.NotesId = NoteId;
+                label.LabelName = LabelName;
                 fundoContext.Add(label);
                 int res = fundoContext.SaveChanges();
                 if (res > 0)
@@ -42,5 +45,4 @@ namespace Repository_Layer.Service
         }
     }
 }
-
-
+            

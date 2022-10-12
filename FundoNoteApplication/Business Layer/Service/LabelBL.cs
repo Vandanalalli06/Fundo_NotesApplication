@@ -1,8 +1,6 @@
-﻿using Business_Layer.Interface;
-using Microsoft.Data.SqlClient.DataClassification;
+﻿using BusinessLayer.Interface;
 using Repository_Layer.Entity;
-using Repository_Layer.Interafce;
-using Repository_Layer.Service;
+using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,18 +16,16 @@ namespace Business_Layer.Service
             this.labelRL = labelRL;
         }
 
-        public LabelEntity Create(long userId, long noteId, string LabelName)
+        public LabelEntity CreateLabel(long UserId, long NoteId, string LabelName)
         {
             try
             {
-                return labelRL.Create(userId, noteId, LabelName);
+                return labelRL.CreateLabel(UserId, NoteId, LabelName);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-                throw new Exception(ex.Message);
+                throw ;
             }
         }
     }
 }
-
-       

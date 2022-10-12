@@ -1,12 +1,11 @@
 ﻿using Repository_Layer.Entity;
-using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Repository_Layer.Interafce
+namespace RepositoryLayer.Interface
 {
     public interface ILabelRL
     {
-        public LabelEntity Create(long userId, long noteId, string labelName);
+        public LabelEntity CreateLabel(long UserId, long NoteId, string LabelName);
     }
 }

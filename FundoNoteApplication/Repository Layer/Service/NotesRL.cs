@@ -242,7 +242,6 @@ namespace Repository_Layer.Service
                 var result = fundoContext.NotesTable.Where(u => u.UserId == userId && u.NotesId == notesId).FirstOrDefault();
                 if (result != null)
                 {
-                    //CloudinaryDotNet.Account account = new CloudinaryDotNet.Account {ApiKey = "9279837534759834", ApiSecret = "3fneflkngoer78y5lreng45eytg4n", Cloud = "nvkdcbvkjdfvb"};
                     Account account = new Account(
                        this.configuration["CloudinarySettings:CloudName"],
                        this.configuration["CloudinarySettings:ApiKey"],

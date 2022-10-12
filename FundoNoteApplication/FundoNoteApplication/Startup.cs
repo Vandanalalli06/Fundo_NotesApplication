@@ -1,5 +1,6 @@
 using Business_Layer.Interface;
 using Business_Layer.Service;
+using BusinessLayer.Interface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,6 +16,7 @@ using Microsoft.OpenApi.Models;
 using Repository_Layer.Context;
 using Repository_Layer.Interafce;
 using Repository_Layer.Service;
+using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +45,8 @@ namespace FundoNoteApplication
             services.AddTransient<INotesBL, NotesBL>();
             services.AddTransient<ICollabRL, CollabRL>();
             services.AddTransient<ICollabBL, CollabBL>();
+            services.AddTransient<ILabelBL, LabelBL>();
+            services.AddTransient<ILabelRL, LabelRL>();
 
 
             services.AddSwaggerGen();
