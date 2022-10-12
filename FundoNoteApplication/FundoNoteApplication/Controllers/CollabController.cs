@@ -13,10 +13,34 @@ namespace FundoNoteApplication.Controllers
     {
         private readonly ICollabBL collabBL;
         private readonly FundoContext fundocontext;
-        public CollabController(ICollabBL collabBL,FundoContext fundocontext)
+        public CollabController(ICollabBL collabBL, FundoContext fundocontext)
         {
             this.collabBL = collabBL;
             this.fundocontext = fundocontext;
+        }
+        [Authorize]
+        [HttpPost]
+        [Route("Add")]
+        public ActionResult CollabAdd(long noteId, string email)
+        {
+            try
+            {
+                //long UserID = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserID").Value);
+                var result = collabBL.AddCollab(noteId, email);
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "Added Colabarator Successfully", data = result });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "Adding of Collabarator is Unsuccessfull" });
+                }
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
