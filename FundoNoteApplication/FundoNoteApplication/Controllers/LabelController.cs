@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Interface;
+﻿using Business_Layer.Service;
+using BusinessLayer.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +43,30 @@ namespace FundoNoteApplication.Controllers
                 return this.Ok(new { success = true, message = "Label Retrieved Successfully", data = result});
             else
                 return this.BadRequest(new { success = false, message = "Unable to retrieve Label" });
+        }
+        [Authorize]
+        [HttpPut]
+        [Route("Update")]
+        public ActionResult UpdateLabel(long labelId, string newLabelName)
+        {
+            try
+            {
+                long UserId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserID").Value);
+                var result = labeBL.UpdateLabel(labelId, newLabelName);
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "Label Successfully Updated", data = result });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "Label Could Not Be Updated" });
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
     }

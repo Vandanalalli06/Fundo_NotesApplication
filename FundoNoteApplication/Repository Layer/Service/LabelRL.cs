@@ -60,7 +60,32 @@ namespace Repository_Layer.Service
                 throw new Exception(ex.Message);
             }
         }
+        public LabelEntity UpdateLabel(long labelId, string newLabelName)
+        {
+            try
+            {
+                var labelNameCheck = fundoContext.LabelTable.Where(x => x.LabelID == labelId).FirstOrDefault();
+                if (labelNameCheck != null)
+                {
+                    labelNameCheck.LabelName = newLabelName;
+                    fundoContext.SaveChanges();
+                    return labelNameCheck;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
+        
+    
     
             

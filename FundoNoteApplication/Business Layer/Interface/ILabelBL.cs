@@ -8,5 +8,6 @@ namespace BusinessLayer.Interface
     {
         public LabelEntity CreateLabel(long UserId, long NoteId, string labelName);
         public List<LabelEntity> GetLabel(long userId);
+        public LabelEntity UpdateLabel(long labelId, string newLabelName);
     }
 }

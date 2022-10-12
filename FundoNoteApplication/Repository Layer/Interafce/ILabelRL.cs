@@ -8,5 +8,6 @@ namespace RepositoryLayer.Interface
     {
         public LabelEntity CreateLabel(long UserId, long NoteId, string LabelName);
         public List<LabelEntity> GetLabel(long UserId);
+        public LabelEntity UpdateLabel(long labelId, string newLabelName);
     }
 }

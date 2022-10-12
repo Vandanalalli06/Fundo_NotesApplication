@@ -38,5 +38,17 @@ namespace Business_Layer.Service
                 throw new Exception(ex.Message);
             }
         }
+        public LabelEntity UpdateLabel(long labelId, string newLabelName)
+        {
+            try
+            {
+                return labelRL.UpdateLabel(labelId, newLabelName);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
