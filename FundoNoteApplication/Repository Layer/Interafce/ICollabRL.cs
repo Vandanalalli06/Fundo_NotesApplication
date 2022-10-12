@@ -8,5 +8,6 @@ namespace Repository_Layer.Interafce
     public interface ICollabRL
     {
         public CollabEntity AddCollab(long notesId, string email);
+        public string DeleteCollab(long collabId, string email);
     }
 }

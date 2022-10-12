@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repository_Layer.Context;
+using System;
+using System.Linq;
 
 namespace FundoNoteApplication.Controllers
 {
@@ -37,6 +39,29 @@ namespace FundoNoteApplication.Controllers
                 }
             }
             catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+        [HttpDelete]
+        [Route("Delete")]
+        public ActionResult CollabDelete(long collabId, string email)
+        {
+            try
+            {
+                long UserID = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "UserID").Value);
+                var result = collabBL.DeleteCollab(collabId, email);
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "Collaborator Successfully Deleted", data = result });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "Collaborator Could Not Be Deleted" });
+                }
+            }
+            catch (Exception)
             {
 
                 throw;
