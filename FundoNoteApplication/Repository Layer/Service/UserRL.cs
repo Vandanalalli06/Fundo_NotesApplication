@@ -152,6 +152,13 @@ namespace Repository_Layer.Service
                 throw;
             }
         }
+        public string Decrypt(string base64EncodedData)
+        {
+            if (string.IsNullOrEmpty(base64EncodedData)) return "";
+            var base64EncodeBytes = Convert.FromBase64String(base64EncodedData);
+            var result = Encoding.UTF8.GetString(base64EncodeBytes);
+            result = result.Substring(0, result.Length );
+            return result;
+        }
     }
 }
-       
