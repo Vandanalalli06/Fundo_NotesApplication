@@ -1,4 +1,5 @@
 ﻿using Common_Layer.Model;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Repository_Layer.Context;
@@ -30,7 +31,7 @@ namespace Repository_Layer.Service
                 user.FirstName = userRegistration.FirstName;
                 user.LastName = userRegistration.LastName;
                 user.Email = userRegistration.Email;
-                user.Password = userRegistration.Password;
+                user.Password = EncryptPass(userRegistration.Password);
                 fundoContext.UserTable.Add(user);
                 int res = fundoContext.SaveChanges();
                 if (res > 0)
@@ -135,6 +136,29 @@ namespace Repository_Layer.Service
 
                 throw;
             }
+        }
+        public string EncryptPass(string password)
+        {
+            try
+            {
+                string msg = "";
+                byte[] encode = new byte[password.Length];
+                encode = Encoding.UTF8.GetBytes(password);
+                msg = Convert.ToBase64String(encode);
+                return msg;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public string Decrypt(string base64EncodedData)
+        {
+            if (string.IsNullOrEmpty(base64EncodedData)) return "";
+            var base64EncodeBytes = Convert.FromBase64String(base64EncodedData);
+            var result = Encoding.UTF8.GetString(base64EncodeBytes);
+            result = result.Substring(0, result.Length );
+            return result;
         }
     }
 }
